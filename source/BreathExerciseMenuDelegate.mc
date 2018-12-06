@@ -2,7 +2,7 @@ using Toybox.WatchUi;
 using Toybox.System;
 
 class BreathExerciseMenuDelegate extends WatchUi.MenuInputDelegate {
-
+	
     function initialize() {
         MenuInputDelegate.initialize();
     }
@@ -13,6 +13,7 @@ class BreathExerciseMenuDelegate extends WatchUi.MenuInputDelegate {
         } else if (item == :item_2) {
             System.println("item 2");
         }
+        
     }
 
 }
