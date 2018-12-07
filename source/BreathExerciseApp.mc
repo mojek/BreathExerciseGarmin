@@ -15,6 +15,7 @@ class BreathExerciseApp extends Application.AppBase {
     // onStart() is called on application start up
     function onStart(state) {
     	System.println("onStart init");
+    	System.println(3.0/2);
     	
     }
  

@@ -23,7 +23,12 @@ class BreathExerciseController{
     function start() {
         // Start the model's processing
         System.println("controller start timer");
-        mModel.start();
+        if(mRunning){
+        	mModel.pause();
+        }else{
+        	mModel.start();
+        } 
+        
         // Flag that we are running
         mRunning = true;
     }
@@ -35,6 +40,14 @@ class BreathExerciseController{
         mModel.stop();
         // Flag that we are not running
         mRunning = false;
+    }
+    // Are we running currently?
+    function isRunning() {
+        return mRunning;
+    }
+    
+    function getTimeLeft() {
+        return mModel.print_time_left();
     }
 	
 }
