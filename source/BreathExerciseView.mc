@@ -41,9 +41,7 @@ class BreathExerciseView extends WatchUi.View {
             //var timeString = mController.getTimeLeft();
             var time = mController.getTimeLeft(); 
             System.println(time);
-            var minutes = Math.floor(time/60);
-            var seconds = (time/60 - minutes)*60;
-            var timeString = Lang.format("$1$:$2$", [minutes.format("%02d"),seconds.format("%.1f")]);
+            var timeString = printTime(time);
             // Update the time
             System.println(timeString);
             mLabel.setText(timeString);
@@ -59,6 +57,13 @@ class BreathExerciseView extends WatchUi.View {
     // state of this View here. This includes freeing resources from
     // memory.
     function onHide() {
+    }
+    
+    function printTime(time){
+    	var minutes = Math.floor(time/60);
+        var seconds = (time/60 - minutes)*60;
+        var timeString = Lang.format("$1$:$2$", [minutes.format("%02d"),seconds.format("%.1f")]);
+        return timeString;
     }
 
 }
