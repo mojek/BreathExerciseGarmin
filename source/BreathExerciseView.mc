@@ -23,7 +23,9 @@ class BreathExerciseView extends WatchUi.View {
     function onLayout(dc) {
     	setLayout(Rez.Layouts.MainLayout(dc));
     	mLabel = View.findDrawableById("MainLabel");
-    	System.println(mLabel);
+    
+    	
+    	
        
     }
 
@@ -31,22 +33,19 @@ class BreathExerciseView extends WatchUi.View {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() {
-    }
+		
+	}
 
     // Update the view
    function onUpdate(dc) {
         // If we are running, show a running clock
+      	var timeString = printTimeLeft();
+        mLabel.setText(timeString);
+        
         if(mController.isRunning() ) {
-            // Format time
-            //var timeString = mController.getTimeLeft();
-            var time = mController.getTimeLeft(); 
-            System.println(time);
-            var timeString = printTime(time);
-            // Update the time
-            System.println(timeString);
-            mLabel.setText(timeString);
+            
         }else{
-        	mLabel.setText(mPrompt);
+        	//mLabel.setText(mPrompt);
         }
 
         // Call the parent onUpdate function to redraw the layout
@@ -59,11 +58,13 @@ class BreathExerciseView extends WatchUi.View {
     function onHide() {
     }
     
-    function printTime(time){
+    function printTimeLeft(){
+    	var time = mController.getTimeLeft(); 
     	var minutes = Math.floor(time/60);
         var seconds = (time/60 - minutes)*60;
-        var timeString = Lang.format("$1$:$2$", [minutes.format("%02d"),seconds.format("%.1f")]);
+        var timeString = Lang.format("$1$:$2$", [minutes.format("%02d"),seconds.format("%.01f")]);
         return timeString;
     }
-
+    
+   
 }
