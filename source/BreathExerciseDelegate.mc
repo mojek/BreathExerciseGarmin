@@ -20,7 +20,6 @@ class BreathExerciseDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
      function onMenu() {  	
-     
         WatchUi.pushView(new Rez.Menus.MainMenu(), new BreathExerciseMenuDelegate(), WatchUi.SLIDE_UP);
         return true;
     }
