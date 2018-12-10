@@ -5,7 +5,8 @@ using Toybox.Math;
 using Toybox.Lang;
 class BreathExerciseModel{
 	var cycle_time = 5.2;
-	var training_minutes = 7.0;
+	var starter_minutes	= 7.0;
+	var training_minutes_left = starter_minutes;
 	var breath_states = ["inhale" , "hold on", "exhale" , "hold on"];
 	var breath_states_ratio = [1, 0, 2, 3];
 	
@@ -26,7 +27,7 @@ class BreathExerciseModel{
     }
     
      function pause() {
-       System.println("stop breathing");
+       System.println("pouse breathing");
        myTimer.stop();
        return true;
     }
@@ -40,18 +41,18 @@ class BreathExerciseModel{
     
     }
     function calulate_time_left(){
-    	var training_minutes_in_seconds = training_minutes * 60;
+    	var training_minutes_in_seconds = training_minutes_left * 60;
     	//System.println("training_minutes_in_seconds: "+ training_minutes_in_seconds);
-    	var training_minutes_in_miliseconds = training_minutes * 60000;
+    	var training_minutes_in_miliseconds = training_minutes_left * 60000;
     	//System.println("training_minutes_in_miliseconds: "+ training_minutes_in_miliseconds);
     	var dif = training_minutes_in_miliseconds - loop_size_in_mili;
     	//System.println("training_minutes_in_miliseconds - loop_size_in_mili: " + dif/60000);
-    	training_minutes = dif/60000;
+    	training_minutes_left = dif/60000;
     } 
     
     function getTrainingLeftInSeconds(){
     	//return in seconds
-    	return training_minutes* 60;
+    	return training_minutes_left* 60;
     }
     
     
@@ -64,8 +65,8 @@ class BreathExerciseModel{
     }
     
     function print_time_left() {
-    	var full_minute = Math.floor(training_minutes);
-    	var seconds_with_tens = (training_minutes - full_minute)*60;
+    	var full_minute = Math.floor(training_minutes_left);
+    	var seconds_with_tens = (training_minutes_left - full_minute)*60;
     	var tens = (seconds_with_tens - seconds_with_tens.toNumber())*10;
     	var number_minute =  full_minute.toNumber();
     	var number_seconds = seconds_with_tens.toNumber();

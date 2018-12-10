@@ -25,12 +25,14 @@ class BreathExerciseController{
         System.println("controller start timer");
         if(mRunning){
         	mModel.pause();
+        	mRunning = false;
         }else{
         	mModel.start();
+        	mRunning = true;
         } 
         
         // Flag that we are running
-        mRunning = true;
+        
     }
 
     // Stop the recording process
