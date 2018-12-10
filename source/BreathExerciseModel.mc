@@ -49,6 +49,11 @@ class BreathExerciseModel{
     	training_minutes = dif/60000;
     } 
     
+    function getTrainingLeftInSeconds(){
+    	//return in seconds
+    	return training_minutes* 60;
+    }
+    
     
     function to_milisenods(seconds){
     	return seconds*1000;

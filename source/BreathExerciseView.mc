@@ -21,8 +21,10 @@ class BreathExerciseView extends WatchUi.View {
 
     // Load your resources here
     function onLayout(dc) {
+    	setLayout(Rez.Layouts.MainLayout(dc));
     	mLabel = View.findDrawableById("MainLabel");
-        setLayout(Rez.Layouts.MainLayout(dc));
+    	System.println(mLabel);
+       
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -36,10 +38,17 @@ class BreathExerciseView extends WatchUi.View {
         // If we are running, show a running clock
         if(mController.isRunning() ) {
             // Format time
-            var timeString = mController.getTimeLeft();
+            //var timeString = mController.getTimeLeft();
+            var time = mController.getTimeLeft(); 
+            System.println(time);
+            var minutes = Math.floor(time/60);
+            var seconds = (time/60 - minutes)*60;
+            var timeString = Lang.format("$1$:$2$", [minutes.format("%02d"),seconds.format("%.1f")]);
             // Update the time
+            System.println(timeString);
             mLabel.setText(timeString);
-       
+        }else{
+        	mLabel.setText(mPrompt);
         }
 
         // Call the parent onUpdate function to redraw the layout

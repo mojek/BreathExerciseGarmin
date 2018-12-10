@@ -47,7 +47,7 @@ class BreathExerciseController{
     }
     
     function getTimeLeft() {
-        return mModel.print_time_left();
+        return mModel.getTrainingLeftInSeconds();
     }
 	
 }
