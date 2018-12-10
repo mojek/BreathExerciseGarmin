@@ -61,8 +61,9 @@ class BreathExerciseView extends WatchUi.View {
     function printTimeLeft(){
     	var time = mController.getTimeLeft(); 
     	var minutes = Math.floor(time/60);
-        var seconds = (time/60 - minutes)*60;
-        var timeString = Lang.format("$1$:$2$", [minutes.format("%02d"),seconds.format("%.01f")]);
+        var seconds =  Math.floor((time/60 - minutes)*60).toNumber();
+        var tenth = (((time/60 - minutes)*60 - seconds)*10).toNumber();
+        var timeString = Lang.format("$1$:$2$:$3$", [minutes.format("%02d"),seconds.format("%02d"),tenth]);
         return timeString;
     }
     
