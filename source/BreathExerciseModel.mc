@@ -35,6 +35,7 @@ class BreathExerciseModel{
     function count_down(){
     	calulate_time_left();
     	System.println("time left: "+print_time_left()+ "");
+    	System.println("time passed: "+time_passed()+ "");
     	System.println("time full_cycle_time: "+ full_cycle_time()+ "");
     	WatchUi.requestUpdate();
     }
@@ -52,6 +53,11 @@ class BreathExerciseModel{
     } 
     function current_cycle(){
     	
+    }
+    
+    function time_passed(){
+    	// return in seconds
+    	return starter_minutes - training_minutes_left;  
     }
     
     function full_cycle_time(){
