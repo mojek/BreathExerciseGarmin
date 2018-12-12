@@ -4,12 +4,11 @@ using Toybox.WatchUi;
 using Toybox.Math;
 using Toybox.Lang;
 class BreathExerciseModel{
-	var cycle_time = 5; //seconds
+	var cycle_time = 5.2; //seconds
 	var starter_minutes	= 7.0; //minutes
-	var training_minutes_left = starter_minutes;
 	var breath_states = ["inhale" , "hold on", "exhale" , "hold on"];
 	var breath_states_ratio = [1, 0, 2, 3];
-	
+	var training_minutes_left = calculate_full_time_to_full_cicle();
 	var myTimer ;
 	var loop_size_in_mili = 100;
 	var current_breath_state;
@@ -39,6 +38,7 @@ class BreathExerciseModel{
     	System.println("time full_cycle_time: "+ full_cycle_time()+ "");
     	System.println("current cycle: "+ current_cycle()+ "");
     	System.println("all_cycle_count: "+ all_cycles_count()+ "");
+    	System.println("calculate_full_time_to_full_cicle: "+ calculate_full_time_to_full_cicle()+ "");
     	WatchUi.requestUpdate();
     }
     function change_breath_state(){
@@ -74,7 +74,10 @@ class BreathExerciseModel{
 		}
 		return seconds.toFloat()/60; 
     }
-    
+    function calculate_full_time_to_full_cicle(){
+    	//training_minutes_left = cycle_time * all_cycles_count();
+    	return full_cycle_time() * all_cycles_count();
+    }
     function current_state(){
     
     }
