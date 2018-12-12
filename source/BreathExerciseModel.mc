@@ -38,6 +38,7 @@ class BreathExerciseModel{
     	System.println("time passed: "+time_passed()+ "");
     	System.println("time full_cycle_time: "+ full_cycle_time()+ "");
     	System.println("current cycle: "+ current_cycle()+ "");
+    	System.println("all_cycle_count: "+ all_cycles_count()+ "");
     	WatchUi.requestUpdate();
     }
     function change_breath_state(){
@@ -54,6 +55,10 @@ class BreathExerciseModel{
     } 
     function current_cycle(){
     	return  Math.ceil(time_passed()/full_cycle_time()).toNumber();
+    }
+    
+    function all_cycles_count(){
+		return  Math.ceil(starter_minutes/full_cycle_time());
     }
     
     function time_passed(){
