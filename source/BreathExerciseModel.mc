@@ -22,12 +22,14 @@ class BreathExerciseModel{
     
     function stop() {
        System.println("stop breathing");
+       vibe();
+       training_minutes_left = calculate_full_time_to_full_cicle();
        myTimer.stop();
+       WatchUi.requestUpdate();	
        return true;
     }
     
      function pause() {
-       vibe();
        System.println("pouse breathing");
        myTimer.stop();
        return true;
@@ -41,9 +43,9 @@ class BreathExerciseModel{
     	//System.println("current cycle: "+ current_cycle()+ "");
     	//System.println("all_cycle_count: "+ all_cycles_count()+ "");
     	//System.println("calculate_full_time_to_full_cicle: "+ calculate_full_time_to_full_cicle()+ "");
-    	System.println("current_seconds_of_cycle: "+ current_seconds_of_cycle()+ "");
-    	System.println("current_breath_state: "+ current_breath_state_label()+ "");
-    	System.println("time_left_breath_state: "+ time_left_breath_state()+ "");
+    	//System.println("current_seconds_of_cycle: "+ current_seconds_of_cycle()+ "");
+    	//System.println("current_breath_state: "+ current_breath_state_label()+ "");
+    	//System.println("time_left_breath_state: "+ time_left_breath_state()+ "");
     	
     	WatchUi.requestUpdate();
     }

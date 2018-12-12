@@ -4,6 +4,8 @@ class BreathExerciseView extends WatchUi.View {
 	hidden var mModel;
     hidden var mController;
     hidden var mLabel;
+    hidden var mLabelCurrentTime;
+    hidden var mLabelCurrentState;
     hidden var mPrompt;
     hidden var mTimer;
 
@@ -14,6 +16,8 @@ class BreathExerciseView extends WatchUi.View {
         mController = Application.getApp().controller;
         // Initialize the label
         mLabel = null;
+        mLabelCurrentTime = null;
+        mLabelCurrentState = null;
         mPrompt = WatchUi.loadResource(Rez.Strings.prompt);
         
     
@@ -23,9 +27,8 @@ class BreathExerciseView extends WatchUi.View {
     function onLayout(dc) {
     	setLayout(Rez.Layouts.MainLayout(dc));
     	mLabel = View.findDrawableById("MainLabel");
-    
-    	
-    	
+    	mLabelCurrentTime = View.findDrawableById("mLabelCurrentTime");
+    	mLabelCurrentState = View.findDrawableById("mLabelCurrentState");
        
     }
 
@@ -42,8 +45,12 @@ class BreathExerciseView extends WatchUi.View {
       	var timeString = printTimeLeft();
         mLabel.setText(timeString);
         
+        //mLabelCurrentTime.setText(timeString);
+        //mLabelCurrentState.setText(timeString);
+        
         if(mController.isRunning() ) {
-            
+            mLabelCurrentTime.setText(mModel.time_left_breath_state().toString());
+        	mLabelCurrentState.setText(mModel.current_breath_state_label());
         }else{
         	//mLabel.setText(mPrompt);
         }
