@@ -3,6 +3,7 @@ using Toybox.Timer;
 using Toybox.WatchUi;
 using Toybox.Math;
 using Toybox.Lang;
+using Toybox.Attention;
 class BreathExerciseModel{
 	var seconds_per_ratio_unit = 5.2; //seconds
 	var starter_minutes	= 7.0; //minutes
@@ -136,6 +137,20 @@ class BreathExerciseModel{
 	    }else{
 	    	return number;
 	   } 	
+    }
+    
+    function vibe(){
+    	if (Attention has :vibrate) {
+    	var vibeData =
+	    	[
+	        	new Attention.VibeProfile(25, 2000),
+	        	new Attention.VibeProfile(50, 2000),
+	        	new Attention.VibeProfile(100, 2000)
+	    	];
+		Attention.vibrate(vibeData);
+		}
+		
+    
     }
     
     
