@@ -39,11 +39,19 @@ class BreathExerciseModel{
     	System.println("current cycle: "+ current_cycle()+ "");
     	System.println("all_cycle_count: "+ all_cycles_count()+ "");
     	System.println("calculate_full_time_to_full_cicle: "+ calculate_full_time_to_full_cicle()+ "");
+    	System.println("current_seconds_of_cycle: "+ current_seconds_of_cycle()+ "");
+    	
     	WatchUi.requestUpdate();
     }
-    function change_breath_state(){
     
+    function breath_state(){
+    	
     }
+    
+    function current_seconds_of_cycle(){
+		return (full_cycle_time() - (current_cycle()*full_cycle_time() - time_passed()))*60;
+    }
+    
     function calulate_time_left(){
     	var training_minutes_in_seconds = training_minutes_left * 60;
     	//System.println("training_minutes_in_seconds: "+ training_minutes_in_seconds);
@@ -52,7 +60,8 @@ class BreathExerciseModel{
     	var dif = training_minutes_in_miliseconds - loop_size_in_mili;
     	//System.println("training_minutes_in_miliseconds - loop_size_in_mili: " + dif/60000);
     	training_minutes_left = dif/60000;
-    } 
+    }
+     
     function current_cycle(){
     	return  Math.ceil(time_passed()/full_cycle_time()).toNumber();
     }
@@ -63,7 +72,7 @@ class BreathExerciseModel{
     
     function time_passed(){
     	// return in minutes
-    	return starter_minutes - training_minutes_left;  
+    	return calculate_full_time_to_full_cicle() - training_minutes_left;  
     }
     
     function full_cycle_time(){
