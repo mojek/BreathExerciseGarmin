@@ -4,14 +4,13 @@ using Toybox.WatchUi;
 using Toybox.Math;
 using Toybox.Lang;
 class BreathExerciseModel{
-	var cycle_time = 5.2; //seconds
+	var seconds_per_ratio_unit = 5.2; //seconds
 	var starter_minutes	= 7.0; //minutes
 	var breath_states = ["inhale" , "hold on", "exhale" , "hold on"];
 	var breath_states_ratio = [1, 0, 2, 3];
 	var training_minutes_left = calculate_full_time_to_full_cicle();
 	var myTimer ;
 	var loop_size_in_mili = 100;
-	var current_breath_state;
 	function start() {
        System.println("start breathing");
        myTimer = new Timer.Timer();
@@ -33,19 +32,28 @@ class BreathExerciseModel{
     
     function count_down(){
     	calulate_time_left();
-    	System.println("time left: "+print_time_left()+ "");
-    	System.println("time passed: "+time_passed()+ "");
-    	System.println("time full_cycle_time: "+ full_cycle_time()+ "");
-    	System.println("current cycle: "+ current_cycle()+ "");
-    	System.println("all_cycle_count: "+ all_cycles_count()+ "");
-    	System.println("calculate_full_time_to_full_cicle: "+ calculate_full_time_to_full_cicle()+ "");
+    	//System.println("time left: "+print_time_left()+ "");
+    	//System.println("time passed: "+time_passed()+ "");
+    	//System.println("time full_cycle_time: "+ full_cycle_time()+ "");
+    	//System.println("current cycle: "+ current_cycle()+ "");
+    	//System.println("all_cycle_count: "+ all_cycles_count()+ "");
+    	//System.println("calculate_full_time_to_full_cicle: "+ calculate_full_time_to_full_cicle()+ "");
     	System.println("current_seconds_of_cycle: "+ current_seconds_of_cycle()+ "");
+    	System.println("current_breath_state: "+ current_breath_state()+ "");
     	
     	WatchUi.requestUpdate();
     }
     
-    function breath_state(){
-    	
+    function current_breath_state(){
+    	var current_seconds = current_seconds_of_cycle();
+    	var states_left_time = 0.0;
+    	for( var i = 0; i < breath_states_ratio.size(); i++ ) {
+    		states_left_time = states_left_time + breath_states_ratio[i].toFloat() *  seconds_per_ratio_unit;
+    		if (current_seconds < states_left_time){
+    			return breath_states[i];
+    		}
+		}
+    		
     }
     
     function current_seconds_of_cycle(){
@@ -79,7 +87,7 @@ class BreathExerciseModel{
     	// return in minutes
     	var seconds = 0;
     	for( var i = 0; i < breath_states_ratio.size(); i++ ) {
-    		seconds = seconds +  breath_states_ratio[i] * cycle_time;
+    		seconds = seconds +  breath_states_ratio[i] * seconds_per_ratio_unit;
 		}
 		return seconds.toFloat()/60; 
     }
