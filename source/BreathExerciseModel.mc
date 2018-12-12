@@ -12,6 +12,7 @@ class BreathExerciseModel{
 	var training_minutes_left = calculate_full_time_to_full_cicle();
 	var myTimer ;
 	var loop_size_in_mili = 100;
+	var current_breath_state_holder = 0;
 	function start() {
        System.println("start breathing");
        myTimer = new Timer.Timer();
@@ -26,6 +27,7 @@ class BreathExerciseModel{
     }
     
      function pause() {
+       vibe();
        System.println("pouse breathing");
        myTimer.stop();
        return true;
@@ -61,6 +63,10 @@ class BreathExerciseModel{
     	for( var i = 0; i < breath_states_ratio.size(); i++ ) {
     		states_left_time = states_left_time + breath_states_ratio[i].toFloat() *  seconds_per_ratio_unit;
     		if (current_seconds < states_left_time){
+    			if(current_breath_state_holder != i){
+    				vibe();
+    			}
+    			current_breath_state_holder = i;
     			return [i, states_left_time - current_seconds];
     		}
 		}
@@ -143,8 +149,8 @@ class BreathExerciseModel{
     	if (Attention has :vibrate) {
     	var vibeData =
 	    	[
-	        	new Attention.VibeProfile(25, 2000),
-	        	new Attention.VibeProfile(50, 2000),
+	        	//new Attention.VibeProfile(25, 2000),
+	        	//new Attention.VibeProfile(50, 2000),
 	        	new Attention.VibeProfile(100, 2000)
 	    	];
 		Attention.vibrate(vibeData);
