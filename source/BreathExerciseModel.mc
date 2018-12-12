@@ -39,18 +39,28 @@ class BreathExerciseModel{
     	//System.println("all_cycle_count: "+ all_cycles_count()+ "");
     	//System.println("calculate_full_time_to_full_cicle: "+ calculate_full_time_to_full_cicle()+ "");
     	System.println("current_seconds_of_cycle: "+ current_seconds_of_cycle()+ "");
-    	System.println("current_breath_state: "+ current_breath_state()+ "");
+    	System.println("current_breath_state: "+ current_breath_state_label()+ "");
+    	System.println("time_left_breath_state: "+ time_left_breath_state()+ "");
     	
     	WatchUi.requestUpdate();
     }
     
+    function time_left_breath_state(){
+		return current_breath_state()[1];
+    }
+    
+    function current_breath_state_label(){
+    	return breath_states[current_breath_state()[0]];
+    }
+    
     function current_breath_state(){
+    	// return index of breath state that is current and current time of this unit
     	var current_seconds = current_seconds_of_cycle();
     	var states_left_time = 0.0;
     	for( var i = 0; i < breath_states_ratio.size(); i++ ) {
     		states_left_time = states_left_time + breath_states_ratio[i].toFloat() *  seconds_per_ratio_unit;
     		if (current_seconds < states_left_time){
-    			return breath_states[i];
+    			return [i, states_left_time - current_seconds];
     		}
 		}
     		
