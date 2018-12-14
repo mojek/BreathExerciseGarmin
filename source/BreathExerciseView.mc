@@ -49,7 +49,7 @@ class BreathExerciseView extends WatchUi.View {
         //mLabelCurrentState.setText(timeString);
         
         if(mController.isRunning() ) {
-            mLabelCurrentTime.setText(mModel.time_left_breath_state().toString());
+            mLabelCurrentTime.setText(printTimeLeftBreathState());
         	mLabelCurrentState.setText(mModel.current_breath_state_label());
         }else{
         	//mLabel.setText(mPrompt);
@@ -72,6 +72,10 @@ class BreathExerciseView extends WatchUi.View {
         var tenth = (((time/60 - minutes)*60 - seconds)*10).toNumber();
         var timeString = Lang.format("$1$:$2$:$3$", [minutes.format("%02d"),seconds.format("%02d"),tenth]);
         return timeString;
+    }
+    function printTimeLeftBreathState(){
+    	var time_left_breath_state =  mModel.time_left_breath_state();
+    	return  Lang.format("$1$", [time_left_breath_state.format("%.1f")]);
     }
     
    

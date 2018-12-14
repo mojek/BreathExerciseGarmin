@@ -15,9 +15,15 @@ class BreathExerciseDelegate extends WatchUi.BehaviorDelegate {
     }
     
     function onBack() {
-        System.println("stop timer");
-        mController.stop();
+    	if(mController.isRunning()){
+        	System.println("stop timer");
+        	mController.stop();
+        }else{
+        	 System.exit();
+        	
+        }
         return true;
+        
     }
      function onMenu() {  	
         WatchUi.pushView(new Rez.Menus.MainMenu(), new BreathExerciseMenuDelegate(), WatchUi.SLIDE_UP);

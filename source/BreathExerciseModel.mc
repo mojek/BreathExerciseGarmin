@@ -5,8 +5,8 @@ using Toybox.Math;
 using Toybox.Lang;
 using Toybox.Attention;
 class BreathExerciseModel{
-	var seconds_per_ratio_unit = 5.2; //seconds
-	var starter_minutes	= 7.0; //minutes
+	var seconds_per_ratio_unit = 5.4; //seconds
+	var starter_minutes	= 0.3; //minutes
 	var breath_states = ["inhale" , "hold on", "exhale" , "hold on"];
 	var breath_states_ratio = [1, 0, 2, 3];
 	var training_minutes_left = calculate_full_time_to_full_cicle();
@@ -36,6 +36,18 @@ class BreathExerciseModel{
     }
     
     function count_down(){
+    		
+    	
+   		 if(training_minutes_left <= 0){
+    		myTimer.stop();
+    	    training_minutes_left = calculate_full_time_to_full_cicle();
+    		System.println("all time left");
+    		vibe();
+    		vibe();
+    		vibe();
+    		WatchUi.requestUpdate();
+    		return true;
+    	}
     	calulate_time_left();
     	//System.println("time left: "+print_time_left()+ "");
     	//System.println("time passed: "+time_passed()+ "");
