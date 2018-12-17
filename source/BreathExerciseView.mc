@@ -75,7 +75,11 @@ class BreathExerciseView extends WatchUi.View {
     }
     function printTimeLeftBreathState(){
     	var time_left_breath_state =  mModel.time_left_breath_state();
-    	return  Lang.format("$1$", [time_left_breath_state.format("%.1f")]);
+    	if(time_left_breath_state==0.0){
+    		return "";
+    	}else{
+    		return  Lang.format("$1$", [time_left_breath_state.format("%.1f")]);
+    	}
     }
     
    

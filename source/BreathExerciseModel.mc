@@ -6,17 +6,19 @@ using Toybox.Lang;
 using Toybox.Attention;
 class BreathExerciseModel{
 	var seconds_per_ratio_unit = 5.4; //seconds
-	var starter_minutes	= 0.3; //minutes
+	var starter_minutes	= 7.0; //minutes
 	var breath_states = ["inhale" , "hold on", "exhale" , "hold on"];
 	var breath_states_ratio = [1, 0, 2, 3];
 	var training_minutes_left = calculate_full_time_to_full_cicle();
 	var myTimer ;
 	var loop_size_in_mili = 100;
 	var current_breath_state_holder = 0;
+	var model_running = false;
 	function start() {
        System.println("start breathing");
        myTimer = new Timer.Timer();
        myTimer.start(method(:count_down), loop_size_in_mili, true);
+       model_running = true;
        return true;
     }
     
@@ -25,6 +27,7 @@ class BreathExerciseModel{
        vibe();
        training_minutes_left = calculate_full_time_to_full_cicle();
        myTimer.stop();
+       model_running = false;
        WatchUi.requestUpdate();	
        return true;
     }
@@ -32,42 +35,49 @@ class BreathExerciseModel{
      function pause() {
        System.println("pouse breathing");
        myTimer.stop();
+       model_running = false;
        return true;
     }
-    
+   
     function count_down(){
-    		
-    	
-   		 if(training_minutes_left <= 0){
+    	 if(training_minutes_left <= 0){
+   		 	model_running = false;
     		myTimer.stop();
-    	    training_minutes_left = calculate_full_time_to_full_cicle();
-    		System.println("all time left");
+    		training_minutes_left = calculate_full_time_to_full_cicle();
     		vibe();
     		vibe();
     		vibe();
     		WatchUi.requestUpdate();
     		return true;
+    	}else{
+	    	calulate_time_left();
+	    	//System.println("time left: "+print_time_left()+ "");
+	    	//System.println("time passed: "+time_passed()+ "");
+	    	//System.println("time full_cycle_time: "+ full_cycle_time()+ "");
+	    	//System.println("current cycle: "+ current_cycle()+ "");
+	    	//System.println("all_cycle_count: "+ all_cycles_count()+ "");
+	    	//System.println("calculate_full_time_to_full_cicle: "+ calculate_full_time_to_full_cicle()+ "");
+	    	//System.println("current_seconds_of_cycle: "+ current_seconds_of_cycle()+ "");
+	    	//System.println("current_breath_state: "+ current_breath_state_label()+ "");
+	    	//System.println("time_left_breath_state: "+ time_left_breath_state()+ "");
+	    	WatchUi.requestUpdate();
     	}
-    	calulate_time_left();
-    	//System.println("time left: "+print_time_left()+ "");
-    	//System.println("time passed: "+time_passed()+ "");
-    	//System.println("time full_cycle_time: "+ full_cycle_time()+ "");
-    	//System.println("current cycle: "+ current_cycle()+ "");
-    	//System.println("all_cycle_count: "+ all_cycles_count()+ "");
-    	//System.println("calculate_full_time_to_full_cicle: "+ calculate_full_time_to_full_cicle()+ "");
-    	//System.println("current_seconds_of_cycle: "+ current_seconds_of_cycle()+ "");
-    	//System.println("current_breath_state: "+ current_breath_state_label()+ "");
-    	//System.println("time_left_breath_state: "+ time_left_breath_state()+ "");
-    	
-    	WatchUi.requestUpdate();
     }
     
     function time_left_breath_state(){
-		return current_breath_state()[1];
+		if(model_running){
+			return current_breath_state()[1];
+		}else{
+			return 0.0;
+		}
     }
     
     function current_breath_state_label(){
-    	return breath_states[current_breath_state()[0]];
+    	if(model_running){
+    		return breath_states[current_breath_state()[0]];
+    	}else{
+    		return   "";
+    	}
     }
     
     function current_breath_state(){
