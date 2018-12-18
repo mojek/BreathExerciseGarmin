@@ -3,6 +3,7 @@
 
     <string id="prompt">00:00.0</string>
 	<string id="hold">hold on..</string>	
-    <string id="menu_label_1">Item 1</string>
-    <string id="menu_label_2">Item 2</string>
+    <string id="menu_label_1">Session time</string>
+    <string id="menu_label_2">Breath Ratio</string>
+    <string id="menu_label_3">Seconds per ratio unit</string>
 </strings>
