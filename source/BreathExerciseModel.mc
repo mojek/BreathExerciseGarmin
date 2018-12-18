@@ -24,7 +24,7 @@ class BreathExerciseModel{
     
     function stop() {
        System.println("stop breathing");
-       vibe();
+       vibe(70, 2000);
        training_minutes_left = calculate_full_time_to_full_cicle();
        myTimer.stop();
        model_running = false;
@@ -34,7 +34,9 @@ class BreathExerciseModel{
     
      function pause() {
        System.println("pouse breathing");
+       vibe(20, 1000);
        myTimer.stop();
+       
        model_running = false;
        return true;
     }
@@ -44,9 +46,7 @@ class BreathExerciseModel{
    		 	model_running = false;
     		myTimer.stop();
     		training_minutes_left = calculate_full_time_to_full_cicle();
-    		vibe();
-    		vibe();
-    		vibe();
+    		vibe(100, 1700);
     		WatchUi.requestUpdate();
     		return true;
     	}else{
@@ -88,7 +88,7 @@ class BreathExerciseModel{
     		states_left_time = states_left_time + breath_states_ratio[i].toFloat() *  seconds_per_ratio_unit;
     		if (current_seconds < states_left_time){
     			if(current_breath_state_holder != i){
-    				vibe();
+    				vibe(80, 500);
     			}
     			current_breath_state_holder = i;
     			return [i, states_left_time - current_seconds];
@@ -169,13 +169,13 @@ class BreathExerciseModel{
 	   } 	
     }
     
-    function vibe(){
+    function vibe(power, length){
     	if (Attention has :vibrate) {
     	var vibeData =
 	    	[
 	        	//new Attention.VibeProfile(25, 2000),
 	        	//new Attention.VibeProfile(50, 2000),
-	        	new Attention.VibeProfile(100, 2000)
+	        	new Attention.VibeProfile(power, length)
 	    	];
 		Attention.vibrate(vibeData);
 		}
